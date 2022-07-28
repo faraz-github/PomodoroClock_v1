@@ -1,11 +1,17 @@
+import { Container } from "@mui/system";
 import { useState, useEffect } from "react";
+import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
+import 'react-circular-progressbar/dist/styles.css';
 
-function Timer({ isPaused, mode, setMode, cycles, setCycles }) {
+function Timer({ isPaused, mode, setMode, cycles, setCycles, setTitle }) {
 
-    const workTime = 25;
-    const breakTime = 5;
-    const [timeInSeconds, setTimeInSeconds] = useState(mode === "work" ? workTime * 60 : breakTime * 60);
-    const [title, setTitle] = useState(mode === "work" ? "Keep working" : "Take a break");
+    const workColor = '#00ADB5';
+    const breakColor = '#FF2E63';
+
+    const workTime = 25 * 60;
+    const breakTime = 5 * 60;
+    const [timeInSeconds, setTimeInSeconds] = useState(mode === "work" ? workTime : breakTime);
+
 
     const tick = () => {
         setTimeInSeconds(timeInSeconds - 1);
@@ -13,8 +19,8 @@ function Timer({ isPaused, mode, setMode, cycles, setCycles }) {
 
     const switchMode = () => {
         mode === "work" ? setMode("break") : setMode("work");
-        mode === "work" ? setTitle("Take a break") : setTitle("Keep working");
-        mode === "work" ? setTimeInSeconds(breakTime * 60) : setTimeInSeconds(workTime * 60);
+        mode === "work" ? setTitle("Break Time") : setTitle("Work Time");
+        mode === "work" ? setTimeInSeconds(breakTime) : setTimeInSeconds(workTime);
     }
 
     const switchCycles = () => {
@@ -39,18 +45,26 @@ function Timer({ isPaused, mode, setMode, cycles, setCycles }) {
         }, 1000);
 
         return () => clearInterval(timerInterval);
-    })
+    });
 
     const minutes = Math.floor(timeInSeconds / 60);
     const seconds = timeInSeconds % 60;
 
+    const totalTime = mode === "work" ? workTime : breakTime;
+    const percentage = Math.round(timeInSeconds / totalTime * 100);
+
     return (
-        <div>
-            <center><h5>{title}</h5></center>
-            <center>
-                {minutes + " : " + seconds}
-            </center>
-        </div>
+        <Container sx={{p:1}}>
+            <CircularProgressbar
+                value={percentage}
+                text={`${minutes < 10 ? `0${minutes}` : minutes} : ${seconds < 10 ? `0${seconds}` : seconds}`}
+                styles={buildStyles({
+                    textColor: mode === 'work' ? workColor : breakColor,
+                    pathColor: mode === 'work' ? workColor : breakColor,
+                    tailColor: 'rgba(255,255,255,.2)',
+                })}
+            />
+        </Container>
     )
 }
 
