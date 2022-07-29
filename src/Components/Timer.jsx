@@ -1,5 +1,7 @@
-import { Container } from "@mui/system";
 import { useState, useEffect } from "react";
+
+import { Container } from "@mui/material";
+
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 
@@ -54,14 +56,13 @@ function Timer({ isPaused, mode, setMode, cycles, setCycles, setTitle }) {
     const percentage = Math.round(timeInSeconds / totalTime * 100);
 
     return (
-        <Container sx={{p:1}}>
+        <Container disableGutters sx={{ pt: 5, pb: 2 }}>
             <CircularProgressbar
                 value={percentage}
                 text={`${minutes < 10 ? `0${minutes}` : minutes} : ${seconds < 10 ? `0${seconds}` : seconds}`}
                 styles={buildStyles({
                     textColor: mode === 'work' ? workColor : breakColor,
                     pathColor: mode === 'work' ? workColor : breakColor,
-                    tailColor: 'rgba(255,255,255,.2)',
                 })}
             />
         </Container>

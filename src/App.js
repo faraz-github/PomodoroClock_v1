@@ -1,8 +1,10 @@
-import { Button, Container, FormControl, IconButton, InputLabel, MenuItem, Paper, Select, Typography } from "@mui/material";
+import theme from "./MUI/theme";
+import { Container, IconButton, ThemeProvider, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import PauseIcon from '@mui/icons-material/Pause';
 
+import Header from "./Components/Header";
 import Timer from "./Components/Timer";
 
 function App() {
@@ -21,10 +23,6 @@ function App() {
     }
   }
 
-  const resetEverything = () => {
-    window.location.reload();
-  }
-
   useEffect(() => {
     if (cycles < 1) {
       setIsPaused(true);
@@ -36,53 +34,32 @@ function App() {
 
 
   return (
-    <Container maxWidth="sm" sx={{ pt: 4 }}>
+    <ThemeProvider theme={theme}>
 
-      <Typography variant="h4" textAlign="center" gutterBottom sx={{
-        fontFamily: 'Saira'
-      }}>
-        Pomodoro Clock
-      </Typography>
-      <Timer isPaused={isPaused} mode={mode} setMode={setMode} cycles={cycles} setCycles={setCycles} setTitle={setTitle} />
+      <Header cycles={cycles} onChangeHandler={onChangeHandler} />
 
-      <Typography variant="h5" gutterBottom textAlign={"center"} sx={{
-        fontFamily: 'Saira'
-      }}>
-        {title}
-      </Typography>
+      <Container maxWidth="sm">
+        <Timer isPaused={isPaused} mode={mode} setMode={setMode} cycles={cycles} setCycles={setCycles} setTitle={setTitle} />
 
-      <Paper variant="outlined" sx={{ p: 2, backgroundColor: "#EEEEEE", border: "5px solid #393E46", display: "flex", justifyContent: "space-evenly", alignItems: "center" }}>
-        <FormControl>
-          <InputLabel sx={{
-            fontFamily: 'Saira'
-          }}>
-            Rounds
-          </InputLabel>
-          <Select
-            value={cycles}
-            label="Rounds"
-            onChange={onChangeHandler}
-            sx={{ fontFamily: 'Saira' }}
-          >
-            <MenuItem value={1} sx={{ fontFamily: 'Saira' }}>One</MenuItem>
-            <MenuItem value={2} sx={{ fontFamily: 'Saira' }}>Two</MenuItem>
-            <MenuItem value={3} sx={{ fontFamily: 'Saira' }}>Three</MenuItem>
-            <MenuItem value={4} sx={{ fontFamily: 'Saira' }}>Four</MenuItem>
-            <MenuItem value={5} sx={{ fontFamily: 'Saira' }}>Five</MenuItem>
-          </Select>
-        </FormControl>
+        <Typography variant="h5" color={"common.white"} textAlign={"center"} gutterBottom>
+          {title}
+        </Typography>
 
-        <IconButton onClick={() => setIsPaused(!isPaused)} sx={{ width: "100px", height: "100px", border: "2px dashed #393E46" }}>
-          {
-            isPaused ? <PlayArrowIcon sx={{ fontSize: 100 }} /> : <PauseIcon sx={{ fontSize: 90 }} />
-          }
-        </IconButton>
+        <center>
+          <IconButton color="primary" size="large" onClick={() => setIsPaused(!isPaused)}>
+            {
+              isPaused ? <PlayArrowIcon fontSize="inherit" /> : <PauseIcon fontSize="inherit" />
+            }
+          </IconButton>
+        </center>
 
-        <Button variant="outlined" color="error" onClick={resetEverything} sx={{ fontFamily: 'Saira' }}>RESET</Button>
-      </Paper>
+        <center>
+          <Typography variant="caption" color={"secondary"}>Copyright © Faraz</Typography>
+        </center>
 
+      </Container>
 
-    </Container>
+    </ThemeProvider>
   )
 
 }
