@@ -1,6 +1,19 @@
 import { FormControl, InputLabel, MenuItem, Select, Typography } from "@mui/material";
 
-function Rounds({ cycles, onChangeHandler }) {
+import { useClock } from "../Contexts/clockContext";
+
+function Rounds() {
+
+    const { cycles, setCycles } = useClock();
+
+    const onChangeHandler = (e) => {
+        if (e.target.value >= 1 && e.target.value <= 5) {
+            setCycles(e.target.value);
+        } else {
+            return;
+        }
+    }
+
     return (
         <FormControl size="small">
             <InputLabel color="secondary">
