@@ -1,26 +1,39 @@
-# PomodoroClock_v1
+# pomodoro-clock
+The Pomodoro Technique is **a time management method based on 25-minute stretches of focused work broken by five-minute breaks**. with the help of this web app this technique can be followed a little easily.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Tech Stack
+**Client:** ReactJS, MaterialUI
 
-This is a web application that helps you follow the Pomodoro technique for greater productivity.
-
-## Available Commands
-
-- npm install
-- npm start
-
-## Installation
-
-PomodoroClock_v1 requires [Node.js](https://nodejs.org/) to run.
-
-Install the dependencies and start the server.
-
-```sh
-cd PomodoroClock_v1
-npm i
-npm start
+## Run Locally
+Clone the project
+```bash
+  git clone https://github.com/faraz-github/PomodoroClock_v1.git
 ```
+Go to the project directory
+```bash
+  cd PomodoroClock_v1
+```
+Install dependencies 
+```bash
+  npm install
+```
+Start development server
+```bash
+  npm start
+```
+## Design References
+
+**Typography**
+
+[Saira](https://fonts.google.com/specimen/Saira?query=saira) by Google Fonts
+
+**Colors**
+|  Name|  Hex | Color |
+|---|---|---|
+| Charleston Green |#222831| ![#222831](https://via.placeholder.com/20/222831?text=+) |
+| Bright Gray | #EEEEEE| ![#EEEEEE](https://via.placeholder.com/20/EEEEEE?text=+) |
+| Tiffany Blue | #00ADB5| ![#00ADB5](https://via.placeholder.com/20/00ADB5?text=+) |
 
 ## Demo
 
-[PomodoroClock_v1](https://pomodoroclock-ten.vercel.app/)
+[pomodoro-clock)](https://pomodoroclock-ten.vercel.app/)
